@@ -1,7 +1,7 @@
 # Especificación Formal — Sistema de Préstamo de Libros
 
-> **Autor:** [Tu nombre]
-> **Fecha:** [Fecha del taller]
+> **Autor:** Danna Alexandra Madrid Roa
+> **Fecha:** 5-Mayo-2025
 > **Versión:** 1.0
 > **Brief de origen:** Correo de Diana Restrepo, Coordinadora de Biblioteca
 
@@ -11,7 +11,7 @@
 
 ## 1. Propósito del sistema
 
-[Describe en 3-5 líneas qué hace el sistema, en tus propias palabras. No copies el correo. Reformúlalo como técnico.]
+El sistema consulta que libros estan disponibles para prestamos, consulta catalogo de libros, consultar el historial de prestamos por estudiantes registrar prestamos de estudiantes, pregrado pueden prestar max 5 al tiempo y si son de postgrado max 5, registrar devoluciones y aviso de prestamos vencidos y que el sistema valide segun tipo de libro la duración del prestamo, donde si esta marcado como de alta demanda solo puede prestarse 3 días, de lo contrario se prestan 15 días y además calcular las multas por retraso de cada libro
 
 ---
 
@@ -19,11 +19,24 @@
 
 **Incluido en esta versión:**
 
-- [Lista lo que sí está cubierto, bullet a bullet]
+- Consultar catálogo de libros
+- Consultar libros disponibles para prestamo
+- Solicitar un prestamo
+- Registrar devolución de prestamos de libros
+- Aviso de prestamos vencidos 
+- Validar el número maximo de libros prestados por estudiante
+- Validar duración del prestamo segun tipo de libro, si estan marcado de alta demanda 3 días de prestamo y de lo contrario 15 días de préstamo
+- Validar renovación de prestamos según el tipo de libro
+- Gestionar multas por devolución tardía, la bilioteca cobra 2000 por día de retraso por cada libro
+- Calcular la multa coparando la fecha de devolución con la fecha en que debia haberlo devuelto
+- Validar que mientras el estudiante tenga multas pendiente sin pagar, tampoco puede prestar libros
+
 
 **Explícitamente fuera del alcance:**
 
 - [Lista lo que el correo menciona pero NO se va a implementar. Por ejemplo: el caso de los profesores investigadores.]
+- Catalogar libros
+- Autenticación
 
 ---
 
@@ -31,24 +44,48 @@
 
 ### Entidad: Libro
 
-| Campo     | Tipo     | Obligatorio | Descripción   |
-| `[campo]` | `[tipo]` | sí/no       | [descripción] |
+| Campo  | Tipo | Obligatorio | Descripción   |
+| Codigo | str  | sí          | Código unico de inventario |
+| Titulo | str  | sí          | Titulo del libro |
+| Autor  | str  | sí          | Autor del libro |
+| Sala   | str  | sí          | Sala donde esta ubicado el libro |
 
 ### Entidad: Ejemplar
 
-[Repite la tabla. Cada libro puede tener varios ejemplares. Decide tú la estructura.]
+| Campo     | Tipo | Obligatorio | Descripción   |
+| id        | str  | sí          | Identificador ejemplar |
+| Cod_Libro  | str  | sí          | codigo del libro referenciado |
+| Cantidad  | int  | sí          | cantidad de ejemplares del libro|
 
 ### Entidad: Estudiante
 
-[Tabla de campos]
+| Campo              | Tipo | Obligatorio | Descripción   |
+| codigo             | str  | sí          | código único de estudiante |
+| nombre             | str  | sí          | Nombre de estudiante |
+| programa_academico | str  | sí          | código único de estudiante |
+| nivel_academico    | str  | sí          | Decir si es de pregrado o postgrado |
 
 ### Entidad: Préstamo
 
 [Tabla de campos. Aquí va estudiante_id, ejemplar_id, fecha_prestamo, fecha_devolucion_esperada, fecha_devolucion_real, estado, etc.]
+| Campo                    | Tipo | Obligatorio | Descripción   |
+| Id                       | str  | sí          | Id prestamo |
+| estudiante_cod           | str  | sí          | Codigo de estudiante |
+| ejemplar_id              | str  | sí          | código de ejemplar |
+| fecha_prestammo          | date | sí          |  fecha de cuando se realizo el prestamo |
+| fecha_devolucion_esperada | date | sí         | fecha esperada de decoluación |
+| estado                    | str | sí          | estado del prestamo |
 
 ### Entidad: Multa
 
-[Tabla de campos]
+| Campo                    | Tipo | Obligatorio | Descripción   |
+| Id                       | str  | sí          | Id multa |
+| estudiante_cod           | str  | sí          | Codigo de estudiante |
+| ejemplar_id              | str  | sí          | código de ejemplar |
+| prestamo_id              | str  | sí          |  id del prestamo |
+| fecha_devolucion_real    | date | sí          | fecha esperada de decoluación |
+| dias_retraso             | int  | sí          | cantidad de dias de retaso |
+| valor_total              | float | sí         | Total de la multa |
 
 ### Diagrama de relaciones
 
@@ -143,13 +180,13 @@ Prestamo 0..1 --- 1 Multa
 | 409 | Conflict | Reglas de negocio violadas (límite alcanzado, duplicado, etc.) |
 | 500 | Internal Server Error | Error no controlado del servidor |
 
+[Si usas otros, agrégalos.]
 
 ---
 
 ## 8. Restricciones técnicas
 
-- **Stack:** [Node.js + Express / Python + FastAPI / etc.]
+- **Stack:** [Python + FastAPI]
 - **Persistencia:** datos en memoria. No usar base de datos.
-- **TypeScript** (según tu stack).
 - **Sin autenticación** en esta versión.
 - **Sin frontend** en esta versión. Solo API REST.
