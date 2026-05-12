@@ -11,7 +11,7 @@
 
 ## 1. Propósito del sistema
 
-El sistema consulta que libros estan disponibles para prestamos, consulta catalogo de libros, consultar el historial de prestamos por estudiantes registrar prestamos de estudiantes, pregrado pueden prestar max 5 al tiempo y si son de postgrado max 5, registrar devoluciones y aviso de prestamos vencidos y que el sistema valide segun tipo de libro la duración del prestamo, donde si esta marcado como de alta demanda solo puede prestarse 3 días, de lo contrario se prestan 15 días y además calcular las multas por retraso de cada libro
+El sistema consulta que libros estan disponibles para prestamos, consulta catalogo de libros, consultar el historial de prestamos por estudiantes registrar prestamos de estudiantes, pregrado pueden prestar max 3 al tiempo y si son de postgrado max 5, registrar devoluciones y aviso de prestamos vencidos y que el sistema valide segun tipo de libro la duración del prestamo, donde si esta marcado como de alta demanda solo puede prestarse 3 días, de lo contrario se prestan 15 días y además calcular las multas por retraso de cada libro
 
 ---
 
