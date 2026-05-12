@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\core\")",
+      "Bash(Out-Null)",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\models\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\db\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\repositories\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\services\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\api\\\\schemas\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\app\\\\api\\\\routers\")",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\matem\\\\brief-biblioteca-ucaldas\\\\biblioteca-api\\\\tests\")",
+      "Bash(pip install *)",
+      "Bash(grep -v \"^$\")",
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(pip show *)"
+    ]
+  }
+}
